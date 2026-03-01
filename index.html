@@ -517,8 +517,8 @@
     <button class="filter-btn" onclick="setFilter('wsj', this)">WSJ</button>
     <button class="filter-btn" onclick="setFilter('bloomberg', this)">Bloomberg</button>
     <button class="filter-btn" onclick="setFilter('newsletters', this)">Newsletters</button>
-    <button class="filter-btn" onclick="setFilter('semafor', this)">Semafor</button>
     <button class="filter-btn" onclick="setFilter('bi', this)">BI</button>
+    <button class="filter-btn" onclick="setFilter('techmeme', this)">Techmeme</button>
     <button class="hide-read-btn" id="hide-read-btn" onclick="toggleHideRead()">Hide Read</button>
     <button class="mark-all-btn" id="mark-all-btn" onclick="markAllRead()">Mark All Read</button>
     <button class="filter-btn" onclick="setFilter('reuters', this)">Reuters</button>
@@ -546,7 +546,7 @@ const FEEDS = [
   { title: "Talking Biz News", url: "http://www.talkingbiznews.com/?feed=rss2", category: "daily" },
   { title: "404 Media", url: "https://www.404media.co/rss/", category: "daily" },
   { title: "ProPublica", url: "https://www.propublica.org/feeds/propublica/main", category: "daily" },
-  { title: "Techmeme", url: "http://www.techmeme.com/index.xml", category: "daily" },
+  { title: "Techmeme", url: "http://www.techmeme.com/index.xml", category: "daily", tags: ["techmeme"] },
   { title: "FT Tech", url: "https://www.ft.com/technology?format=rss", category: "daily" },
   { title: "Tech Policy Press", url: "https://techpolicy.press/rss/feed.xml", category: "daily" },
   { title: "AP Tech", url: "https://apnews.com/technology.rss", category: "daily" },
@@ -612,7 +612,7 @@ const FEEDS = [
   { title: "WSJ: Isabella Simonetti", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=WSJ.com+Isabella+Simonetti", category: "daily", tags: ["wsj"] },
   { title: "WSJ: Patience Haggin", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:wsj.com+patience+haggin", category: "daily", tags: ["wsj"] },
   { title: "WSJ: Jennifer Hiller", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Jennifer+hiller+site:wsj.com", category: "daily", tags: ["wsj"] },
-  { title: "WSJ: Eliot Brown", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=+eliot+site:wsj.com+brown+site:wsj.com", category: "daily", tags: ["wsj"] },
+  { title: "WSJ: Eliot Brown", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=eliot+brown+site:wsj.com", category: "daily", tags: ["wsj"] },
   { title: "WSJ: Dan Gallagher", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Dan+Gallagher+site:WSJ.com", category: "daily", tags: ["wsj"] },
   { title: "WSJ: Lindsay Ellis", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Lindsay+Ellis+site:WSJ.com", category: "daily", tags: ["wsj"] },
   { title: "WSJ: Justin Lahart", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Justin+lahart+site:WSJ.com", category: "daily", tags: ["wsj"] },
@@ -632,9 +632,9 @@ const FEEDS = [
   { title: "Gary Marcus", url: "https://garymarcus.substack.com/feed", category: "daily", tags: ["newsletters"] },
   { title: "Brian Merchant", url: "https://www.bloodinthemachine.com/feed", category: "daily", tags: ["newsletters"] },
   // Semafor
-  { title: "Semafor Liz Hoffman", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=liz+hoffman+site:semafor.com", category: "daily", tags: ["semafor"] },
-  { title: "Semafor Reed Albergotti", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=reed+albergotti+site:semafor.com", category: "daily", tags: ["semafor"] },
-  { title: "Semafor Media", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:semafor.com/vertical/media", category: "daily", tags: ["semafor"] },
+  { title: "Semafor Liz Hoffman", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=liz+hoffman+site:semafor.com", category: "daily", tags: [] },
+  { title: "Semafor Reed Albergotti", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=reed+albergotti+site:semafor.com", category: "daily", tags: [] },
+  { title: "Semafor Media", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:semafor.com/vertical/media", category: "daily", tags: [] },
   // Business Insider
   { title: "BI Peter Kafka", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=peter+kafka+business+insider", category: "daily", tags: ["bi"] },
   { title: "BI Katie Notopoulos", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=katie+notopoulos+business+insider", category: "daily", tags: ["bi"] },
@@ -646,7 +646,7 @@ const FEEDS = [
   { title: "BI Dakin Campbell", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=dakin+campbell+business+insider", category: "daily", tags: ["bi"] },
   { title: "BI Aki Ito", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=aki+ito+business+insider", category: "daily", tags: ["bi"] },
   // BlueSky
-  { title: "Techmeme Chatter", url: "https://bsky.app/profile/did:plc:prjmfxhd3woqr4d3sqt6m5to/rss", category: "bluesky" },
+  { title: "Techmeme Chatter", url: "https://bsky.app/profile/did:plc:prjmfxhd3woqr4d3sqt6m5to/rss", category: "bluesky", tags: ["techmeme"] },
   { title: "Drew Harwell", url: "https://bsky.app/profile/did:plc:j5fbnzh57rn7xz65yjc36gxb/rss", category: "bluesky" },
   { title: "Casey Newton", url: "https://bsky.app/profile/did:plc:jg7zvku4khzmvyjwbzv4lnly/rss", category: "bluesky" },
   { title: "Bobby Allyn", url: "https://bsky.app/profile/did:plc:hvedoky7su6dsbu4m2bwfg7y/rss", category: "bluesky" },
@@ -867,7 +867,7 @@ function renderArticles() {
     if (currentFilter === 'all') return true;
     if (currentFilter === 'daily') return a.category === 'daily';
     if (currentFilter === 'bluesky') return a.category === 'bluesky';
-    if (['nyt','wapo','wsj','bloomberg','newsletters','semafor','bi','reuters'].includes(currentFilter))
+    if (['nyt','wapo','wsj','bloomberg','newsletters','bi','reuters','techmeme'].includes(currentFilter))
       return a.tags && a.tags.includes(currentFilter);
     return true;
   });
