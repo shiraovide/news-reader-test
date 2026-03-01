@@ -521,6 +521,7 @@
     <button class="filter-btn" onclick="setFilter('bi', this)">BI</button>
     <button class="hide-read-btn" id="hide-read-btn" onclick="toggleHideRead()">Hide Read</button>
     <button class="mark-all-btn" id="mark-all-btn" onclick="markAllRead()">Mark All Read</button>
+    <button class="filter-btn" onclick="setFilter('reuters', this)">Reuters</button>
     <button class="compact-btn" id="compact-btn" onclick="toggleCompact()">Headlines</button>
     <div class="search-wrap">
       <input type="text" id="search-input" placeholder="Search articles..." oninput="filterBySearch()" />
@@ -607,6 +608,8 @@ const FEEDS = [
   { title: "The Markup", url: "https://themarkup.org/feeds/rss.xml", category: "daily" },
   { title: "GeekWire – Todd Bishop", url: "https://www.geekwire.com/author/todd/feed/", category: "daily" },
   { title: "Wired", url: "http://feeds.wired.com/wired/index", category: "daily" },
+  { title: "Reuters Tech", url: "https://feeds.reuters.com/reuters/technologyNews", category: "daily" },
+  { title: "Reuters: Deepa Seetharaman", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=%22deepa+seetharaman%22+site:reuters.com", category: "daily" },
   // Google News author searches (WSJ etc.)
   { title: "WSJ: Isabella Simonetti", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=WSJ.com+Isabella+Simonetti", category: "daily", tags: ["wsj"] },
   { title: "WSJ: Patience Haggin", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:wsj.com+patience+haggin", category: "daily", tags: ["wsj"] },
@@ -624,6 +627,9 @@ const FEEDS = [
   { title: "The Wire China", url: "https://thewirechina.com/feed", category: "daily" },
   { title: "404 Media Newsletter", url: "https://newsletter.404media.co/feed", category: "daily", tags: ["newsletters"] },
   { title: "Hacker News Best", url: "https://hnrss.org/best", category: "daily" },
+  // Reuters
+  { title: "Reuters Tech", url: "https://feeds.reuters.com/reuters/technologyNews", category: "daily", tags: ["reuters"] },
+  { title: "Reuters: Deepa Seetharaman", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=%22deepa+seetharaman%22+site:reuters.com", category: "daily", tags: ["reuters"] },
   // Semafor
   { title: "Semafor Liz Hoffman", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=liz+hoffman+site:semafor.com", category: "daily", tags: ["semafor"] },
   { title: "Semafor Reed Albergotti", url: "https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=reed+albergotti+site:semafor.com", category: "daily", tags: ["semafor"] },
@@ -860,7 +866,7 @@ function renderArticles() {
     if (currentFilter === 'all') return true;
     if (currentFilter === 'daily') return a.category === 'daily';
     if (currentFilter === 'bluesky') return a.category === 'bluesky';
-    if (['nyt','wapo','wsj','bloomberg','newsletters','semafor','bi'].includes(currentFilter))
+    if (['nyt','wapo','wsj','bloomberg','newsletters','semafor','bi','reuters'].includes(currentFilter))
       return a.tags && a.tags.includes(currentFilter);
     return true;
   });
